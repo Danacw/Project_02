@@ -1,1 +1,44 @@
 <!--Pull in app.js, index.html will need to pull in app.js too-->
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Stocks/Crypto Backlog</title>
+   <!--Add bootstrap and stylesheet-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <!--Add chart.js CDN-->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+   <!--Add our own stylesheet-->
+   <script src="/Coursework/Project_02/static/assets/css/style.css"></script>
+</head>
+
+<body>
+    <!--Add container for chart-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 page-header">
+                <h1>Stocks / Cryptocurrency Backlog</h1>
+                <hr>
+                <p> User input values and timestamps</p>
+            </div>
+        </div>
+        <!--Display chart from api route-->
+        <table class="table table-striped"id="myChart">
+        <thead>
+            <th>User Input</th>
+            <td><textarea class="form-control" rows="20" id="userInput"></textarea>
+            </td>
+            <th>Timestamp</th>
+            <!--timestamp data...-->
+        </thead>
+    </table>  
+    </div>
+    <!--Add footer-->
+    <div id="footer">
+        <p>Data Bootcamp &copy;2021</p>
+    </div>
+    <!--Add app.js-->
+    <script type="text/javascript" src="/Coursework/Project_02/static/assets/js/app.js"></script>
+</body>
+</html>
+

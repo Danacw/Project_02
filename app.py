@@ -8,22 +8,11 @@ import pandas as pd
 
 
 #%%
-<<<<<<< Updated upstream
-################ FLASK SETUP
-<<<<<<< HEAD
-=======
 ################ FLASK SETUP ################
-=======
->>>>>>> f9522dac49611d772c21c1ce70a3e83f8f60d2da
-
 # Postgres Database set up or maybe I could create a csv or JSON file in my flask app... and then do ETL on it?
 engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
 # Creates an instance of Flask
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> f9522dac49611d772c21c1ce70a3e83f8f60d2da
 app = Flask(__name__)
 
 #%%

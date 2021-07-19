@@ -1,35 +1,86 @@
-from flask import Flask, json, jsonify, request
+#%%
+from flask import Flask, json, jsonify, request, redirect
 from flask.templating import render_template
 from multiprocessing import Value 
 from config import db_user, db_password, db_host, db_port, db_name
+from sqlalchemy import create_engine
+import pandas as pd 
 
-# Postgres Database set up
-#engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-
-# Creates an instance of Flask
+#%%
+################ FLASK SETUP
 app = Flask(__name__)
 
-# Displays backlog page 
+#%%
+################ DATABASE SETUP
+engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+#%%
+################ DEFINE FLASK ROUTS
+
+#%%
+################ ROUTE #1: Default route to display backlog
 @app.route("/")
 def backlog():
     return render_template("backlog.html")
 
-# Processes the fetch request on our JavaScript. Takes in user input and routes it to our database.
-@app.route('/api/submit', methods = ["POST"])
-def predict():
-    content = request.json['userInput']
-
-    # # Returns input into a new SQL database (will need to add to / modify this)
-    # conn = engine.connect()
+#%%
+################ ROUTE #2: Route to generate the form and/or POST data. Takes in user input and routes it to our database.
+@app.route('/send', methods = ["GET", "POST"])
+def send():
     
-    return jsonify(content)
+    # connect to our database
+    conn = engine.connect()
 
-# Count how many times the page was visited (Review 5/15/21 Class for this...) Needs to read it from the database as well.
-counter = Value("i", 0)
-counter.value += 1
-print(f"Times visited: (counter.value")    
+        # evaluate if the this is a POST request
+    if request.method == "POST":
+    
+        #use `request.form` to pull form attributes
+        id = request.form["id"]
+        userInput = request.form["userInput"]
+        timestamp = request.form["timestamp"]
+        
+        # convert to a DataFrame so that we can use to_sql
+        searches_df = pd.DataFrame({
+            'id':[id],
+            'userInput':[userInput],
+            'timestamp':[timestamp]
+        })
 
-# Allows Flask app to run smoothly
-if __name__ == "__main__":
-    app.run()
+        # post the update to the DB
+        searches_df.to_sql('stocks_crypto', con=conn, if_exists='append', index=False)
+
+        # close our database connection
+        conn.close()
+
+        # send the user to the endpoint that contains the data listing
+        return redirect('/')
+
+    # if the method is NOT POST (otherwise, GET, then send the user to the app)
+    conn.close()
+    return render_template("index.html")
+
+#%%
+################ ROUTE #3: Route to view the data
+@app.route("/api/data")
+def searches_list():
+
+    # connect to db engine
+    conn = engine.connect()
+
+    # query the database using Pandas
+    stocks_crypto_df = pd.read_sql('SELECT * FROM stocks_crypto', con=conn)
+
+    #convert results to json
+    stocks_crypto_json = stocks_crypto_df.to_json(orient='records')
+
+    #close connection
+    conn.close()
+
+    #return json to the client
+    return stocks_crypto_json
+
+#%%
+##################### RUN APP: Run in debug mode
+if __name__ == "__main":
+    app.run(debug=True)
 

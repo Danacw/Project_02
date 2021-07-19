@@ -6,8 +6,8 @@
   <title>Stocks/Crypto Backlog</title>
    <!--Add bootstrap and stylesheet-->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   <!--Add chart.js CDN-->
-   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <!-- D3 JavaScript from CDN -->
+    <script src='https://d3js.org/d3.v6.min.js'></script>
    <!--Add our own stylesheet-->
    <script src="/Coursework/Project_02/static/assets/css/style.css"></script>
 </head>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <!--Display chart from api route-->
-        <table class="table table-striped"id="myChart">
+        <table class="table table-striped">
         <thead>
             <th>Search ID</th>
             <th>User Input</th>

@@ -7,24 +7,35 @@ from sqlalchemy import create_engine
 import pandas as pd 
 
 #%%
+<<<<<<< Updated upstream
 ################ FLASK SETUP
+=======
+################ FLASK SETUP ################
+
+# Postgres Database set up or maybe I could create a csv or JSON file in my flask app... and then do ETL on it?
+engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+# Creates an instance of Flask
+>>>>>>> Stashed changes
 app = Flask(__name__)
 
 #%%
-################ DATABASE SETUP
+################ DATABASE SETUP ################
 engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
 #%%
-################ DEFINE FLASK ROUTS
+################ DEFINE FLASK ROUTS ################
 
 #%%
-################ ROUTE #1: Default route to display backlog
+# ROUTE #1: Default route to display backlog 
 @app.route("/")
 def backlog():
     return render_template("backlog.html")
 
 #%%
-################ ROUTE #2: Route to generate the form and/or POST data. Takes in user input and routes it to our database.
+# ROUTE #2: Route to generate the form and/or POST data.
+
+# Takes in user input and routes it to our database. 
 @app.route('/send', methods = ["GET", "POST"])
 def send():
     
@@ -35,13 +46,13 @@ def send():
     if request.method == "POST":
     
         #use `request.form` to pull form attributes
-        id = request.form["id"]
+        search_id = request.form["id"]
         userInput = request.form["userInput"]
         timestamp = request.form["timestamp"]
         
         # convert to a DataFrame so that we can use to_sql
         searches_df = pd.DataFrame({
-            'id':[id],
+            'search_id':[search_id],
             'userInput':[userInput],
             'timestamp':[timestamp]
         })
@@ -60,7 +71,7 @@ def send():
     return render_template("index.html")
 
 #%%
-################ ROUTE #3: Route to view the data
+# ROUTE #3: Route to view the data
 @app.route("/api/data")
 def searches_list():
 
@@ -80,7 +91,7 @@ def searches_list():
     return stocks_crypto_json
 
 #%%
-##################### RUN APP: Run in debug mode
+##################### RUN APP #####################
 if __name__ == "__main":
     app.run(debug=True)
 

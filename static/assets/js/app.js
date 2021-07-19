@@ -8,6 +8,7 @@ d3.json('/api/data').then(data => {
 
         Object.values(searches).forEach(col => {
             row.append('td').text(col);
+            //row.append Search ID and Timestamp too????????? 
         });
     });
 });

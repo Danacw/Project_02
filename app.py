@@ -6,8 +6,14 @@ from config import db_user, db_password, db_host, db_port, db_name
 from sqlalchemy import create_engine
 import pandas as pd 
 
+
 #%%
 ################ FLASK SETUP
+
+# Postgres Database set up or maybe I could create a csv or JSON file in my flask app... and then do ETL on it?
+engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+# Creates an instance of Flask
 app = Flask(__name__)
 
 #%%
@@ -33,6 +39,9 @@ def send():
 
         # evaluate if the this is a POST request
     if request.method == "POST":
+
+    # # Returns input into a new SQL database (will need to add to / modify this)
+    conn = engine.connect()
     
         #use `request.form` to pull form attributes
         id = request.form["id"]

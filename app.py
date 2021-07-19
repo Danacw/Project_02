@@ -3,8 +3,8 @@ from flask.templating import render_template
 from multiprocessing import Value 
 from config import db_user, db_password, db_host, db_port, db_name
 
-# Postgres Database set up
-#engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+# Postgres Database set up or maybe I could create a csv or JSON file in my flask app... and then do ETL on it?
+engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
 # Creates an instance of Flask
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def predict():
     content = request.json['userInput']
 
     # # Returns input into a new SQL database (will need to add to / modify this)
-    # conn = engine.connect()
+    conn = engine.connect()
     
     return jsonify(content)
 

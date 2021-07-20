@@ -4,18 +4,17 @@ from flask.templating import render_template
 from multiprocessing import Value 
 from config import db_user, db_password, db_host, db_port, db_name
 from sqlalchemy import create_engine
-import pandas as pd 
+import pandas as pd
+from datetime import datetime 
 
 ################ FLASK SETUP ################
-# Postgres Database set up or maybe I could create a csv or JSON file in my flask app... and then do ETL on it?
-engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
-
 # Creates an instance of Flask
 app = Flask(__name__)
 
 #%%
 ################ DATABASE SETUP ################
 engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+print(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
 #%%
 ################ DEFINE FLASK ROUTS ################
@@ -40,18 +39,18 @@ def send():
     if request.method == "POST":
 
     # # Returns input into a new SQL database (will need to add to / modify this)
-    conn = engine.connect()
-    
-        #use `request.form` to pull form attributes
-        search_id = request.form["id"]
-        userInput = request.form["userInput"]
-        timestamp = request.form["timestamp"]
+        conn = engine.connect()
         
+        #use `request.form` to pull form attributes
+        # search_id = request.form["id"]
+        user_input = request.form["userInput"]
+        time_stamp = datetime.now()
+            
         # convert to a DataFrame so that we can use to_sql
         searches_df = pd.DataFrame({
-            'search_id':[search_id],
-            'userInput':[userInput],
-            'timestamp':[timestamp]
+            
+            'user_input':[user_input],
+            'time_stamp':[time_stamp]
         })
 
         # post the update to the DB
@@ -61,9 +60,9 @@ def send():
         conn.close()
 
         # send the user to the endpoint that contains the data listing
-        return redirect('/')
+        return redirect('/send')
 
-    # if the method is NOT POST (otherwise, GET, then send the user to the app)
+# if the method is NOT POST (otherwise, GET, then send the user to the app)
     conn.close()
     return render_template("index.html")
 
@@ -89,6 +88,6 @@ def searches_list():
 
 #%%
 ##################### RUN APP #####################
-if __name__ == "__main":
+if __name__ == "__main__":
     app.run(debug=True)
 

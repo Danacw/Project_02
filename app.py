@@ -41,8 +41,7 @@ def send():
     # # Returns input into a new SQL database (will need to add to / modify this)
         conn = engine.connect()
         
-        #use `request.form` to pull form attributes
-        # search_id = request.form["id"]
+        #use `request.form` to pull form attributes and datetime.now for timestamp
         user_input = request.form["userInput"]
         time_stamp = datetime.now()
             

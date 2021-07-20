@@ -133,3 +133,4 @@ config.py
 
 
 .DS_Store
+/static.DS_Store

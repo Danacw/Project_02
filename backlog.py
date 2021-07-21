@@ -7,7 +7,16 @@ from sqlalchemy import create_engine
 import pandas as pd
 from datetime import datetime 
 
+<<<<<<< HEAD:backlog.py
 ################ FLASK SETUP ################
+=======
+
+#%%
+################ FLASK SETUP ################
+# Postgres Database set up or maybe I could create a csv or JSON file in my flask app... and then do ETL on it?
+engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+>>>>>>> ecc02d4ec2851934a6752cbac9e97a4e62a42166:app.py
 # Creates an instance of Flask
 app = Flask(__name__)
 

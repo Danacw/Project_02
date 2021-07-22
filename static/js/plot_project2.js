@@ -3,6 +3,9 @@ console.log('plot_project2.js is running')
 
 var apiKey = "nAWhsScxwEjhhNovu38g";
 
+var start_date = '2017-01-01';
+var end_date = '2018-11-22';
+
 /**
  * Helper function to select stock data
  * Returns an array of values
@@ -34,11 +37,24 @@ function handleSubmit() {
   var stock = d3.select("#userInput").node().value;
   console.log(stock);
 
+  fetch('/send', {
+    method: 'POST',
+    body: JSON.stringify({
+        userInput: stock.toUpperCase()
+    }),
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+    }
+})
+
   // clear the input value
   d3.select("#userInput").node().value = "";
 
   // Build the plot with the new stock
   buildPlot(stock);
+
+  //Build summary table
+  buildSummary(stock);
 
   // Get the top stories
   populateTopStories(stock);
@@ -54,7 +70,7 @@ function populateTopStories(stock){
     console.log(data);
 
     topstories_div = d3.select('#topstories')
-
+    topstories_div.html("")
     data.forEach(story => {
 
       story_div = topstories_div.append('div').attr('class', 'col-lg-4 col-md-3 col-sm-3 col-xs-3');
@@ -62,28 +78,56 @@ function populateTopStories(stock){
       thumbnail_link = thumbnail_div.append('a').attr('href', story['news_link']);
       thumbnail_link_img = thumbnail_link.append('img').attr('src', story['image_sources']);
       thumbnail_link_text = thumbnail_div.append('a').attr('href', story['news_link']).text(story['news_title']);
-
-      //topstories_div.append('h4').text(story['news_title']);
-      //topstories_div.append('p').text(story['news_link']);Í
     })
-
-    /*
-                  {% for item in stock %}
-            <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
-              <div class="thumbnail">
-                <a href="{{item.news_link}}">
-                  <img src="{{item.image_sources | default('static/images/error.png', true)}}" alt="top news">
-                  <p>{{item.news_title}} <br> </p>
-                </a>
-                  <!-- <p>{{item.news_para}}</p> -->
-                  <small>{{item.news_sources}} <br> {{item.news_time}}</small>
-              </div>
-            </div>
-            {% endfor %}
-      */
-
   });
+}
 
+function buildSummary(stock) {
+  var sel_stock = stock.toUpperCase()
+  var cur_stock_info = nasdaq100_data.filter(stock => stock.stock_code == sel_stock)[0]
+  console.log(cur_stock_info);
+  var title = d3.select("#company_profile")
+  var introduction_div = d3.select("#introduction")
+  if (cur_stock_info) {
+    title.html(`<a href="${cur_stock_info.wiki_url}"><h2>${cur_stock_info.company_name} Company Profile</h2></a>`);
+    introduction_div.html(`<p>${cur_stock_info.introduction}</p>`);
+  }
+  else {
+    introduction_div.html(`<p> ${stock} Company profile not found.</p>`);
+    title.html("");
+  } 
+  getMonthlyData(stock, start_date, end_date);
+}
+
+function getMonthlyData(stock_code, start_date, end_date) {
+  var queryUrl = `https://www.quandl.com/api/v3/datasets/WIKI/${stock_code}.json?start_date=${start_date}&end_date=${end_date}&api_key=${apiKey}`;
+  console.log(queryUrl);
+  d3.json(queryUrl).then(function(data) {
+    console.log(data);
+    var dates = unpack(data.dataset.data, 0);
+    var openPrices = unpack(data.dataset.data, 1);
+    var highPrices = unpack(data.dataset.data, 2);
+    var lowPrices = unpack(data.dataset.data, 3);
+    var closingPrices = unpack(data.dataset.data, 4);
+    var volume = unpack(data.dataset.data, 5);
+    buildTable(dates, openPrices, highPrices, lowPrices, closingPrices, volume);
+  });
+}
+
+function buildTable(dates, openPrices, highPrices, lowPrices, closingPrices, volume) {
+  var table = d3.select("#summary-table");
+  var tbody = table.select("tbody");
+  tbody.html("");
+  var trow;
+  for (var i = 0; i < 12; i++) {
+    trow = tbody.append("tr");
+    trow.append("td").text(dates[i]);
+    trow.append("td").text(openPrices[i]);
+    trow.append("td").text(highPrices[i]);
+    trow.append("td").text(lowPrices[i]);
+    trow.append("td").text(closingPrices[i]);
+    trow.append("td").text(volume[i]);
+  }
 }
 
 function buildPlot(stock) {
@@ -146,6 +190,10 @@ d3.select("#submit").on("click", handleSubmit);
 
 // For testing only, run buildPlot() with FB by default
 buildPlot('FB');
+getMonthlyData('FB', start_date, end_date);
+buildSummary('FB');
+populateTopStories('FB');
+
 
 
 //getMonthlyData();

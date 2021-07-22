@@ -54,7 +54,7 @@ def send():
         conn = engine.connect()
         
         #use `request.form` to pull form attributes and datetime.now for timestamp
-        user_input = request.form["userInput"]
+        user_input = request.json["userInput"]
         time_stamp = datetime.now()
             
         # convert to a DataFrame so that we can use to_sql

@@ -38,7 +38,7 @@ def backlog():
     return render_template("backlog.html")
 
 #%%
-# ROUTE #2: Route to generate the form and/or POST data.
+# ROUTE #3: Route to generate the form and/or POST data.
 
 # Takes in user input and routes it to our database. 
 @app.route('/send', methods = ["GET", "POST"])
@@ -78,7 +78,7 @@ def send():
     return render_template("index.html")
 
 #%%
-# ROUTE #3: Route to view the data
+# ROUTE #4: Route to view the data
 @app.route("/api/data")
 def searches_list():
 
@@ -98,7 +98,7 @@ def searches_list():
     return stocks_crypto_json
 
 
-# AMY's STUFF
+# ROUTE #5: AMY's STUFF
 
 # Use flask_pymongo to set up mongo connection
 app.config["MONGO_URI"] = "mongodb://localhost:27017/stock_db"

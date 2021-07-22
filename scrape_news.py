@@ -25,10 +25,7 @@ def get_news(ticker):
     # Convert the browser html to a soup object and then quit the browser
     html = browser.html
     news_soup = soup(html, 'html.parser')
-
-    # Add try/except for error handling
-    
-    
+      
     top3_news=[]
 
     for i in range(3):
@@ -42,8 +39,6 @@ def get_news(ticker):
         news_sources=news.find("div", class_="XTjFC WF4CUc").get_text()
         image_sources=news.find("img").get("src")
 
-
-
         data = {
             "news_title": news_title,
             "news_para": news_para,
@@ -54,7 +49,6 @@ def get_news(ticker):
         }
         
         top3_news.append(data)
-
 
     browser.quit()
 

@@ -1,13 +1,14 @@
 #%%
-from flask import Flask, json, jsonify, request, redirect
+
+from flask import Flask, json, jsonify, request, redirect, render_template, url_for
 from flask.templating import render_template
+from flask_pymongo import PyMongo
+import scrape_news
 from multiprocessing import Value 
 from config import db_user, db_password, db_host, db_port, db_name
 from sqlalchemy import create_engine
 import pandas as pd
 from datetime import datetime 
-
-################ FLASK SETUP ################
 
 #%%
 ################ FLASK SETUP ################
@@ -95,6 +96,31 @@ def searches_list():
 
     #return json to the client
     return stocks_crypto_json
+
+
+# AMY's STUFF
+
+# Use flask_pymongo to set up mongo connection
+app.config["MONGO_URI"] = "mongodb://localhost:27017/stock_db"
+mongo = PyMongo(app)
+
+# @app.route("/")
+# def index():
+#     stock = mongo.db.stock.find_one()["data"]
+#     return render_template("index.html", stock=stock)
+
+
+@app.route("/scrape/<ticker>")
+def scrape(ticker):
+    stock = mongo.db.stock 
+    print(ticker)
+    stock_data = scrape_news.get_news(ticker)
+
+    return jsonify(stock_data)
+
+    #stock.update({}, {'data': stock_data, 'ticker': ticker } , upsert=True)
+    #return redirect('/', code=302)
+
 
 #%%
 ##################### RUN APP #####################

@@ -37,18 +37,58 @@ function handleSubmit() {
   // clear the input value
   d3.select("#userInput").node().value = "";
 
-
-
-
   // Build the plot with the new stock
   buildPlot(stock);
+
+  // Get the top stories
+  populateTopStories(stock);
+
+}
+
+function populateTopStories(stock){
+  // Use D3 to create an event handler
+  // d3.select("#update").on("click", updatePage);
+
+  d3.json(`/scrape/${stock}`).then(data => {
+
+    console.log(data);
+
+    topstories_div = d3.select('#topstories')
+
+    data.forEach(story => {
+
+      story_div = topstories_div.append('div').attr('class', 'col-lg-4 col-md-3 col-sm-3 col-xs-3');
+      thumbnail_div = story_div.append('div').attr('class', 'thumbnail');
+      thumbnail_link = thumbnail_div.append('a').attr('href', story['news_link']);
+      thumbnail_link_img = thumbnail_link.append('img').attr('src', story['image_sources']);
+      thumbnail_link_text = thumbnail_div.append('a').attr('href', story['news_link']).text(story['news_title']);
+
+      //topstories_div.append('h4').text(story['news_title']);
+      //topstories_div.append('p').text(story['news_link']);Í
+    })
+
+    /*
+                  {% for item in stock %}
+            <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
+              <div class="thumbnail">
+                <a href="{{item.news_link}}">
+                  <img src="{{item.image_sources | default('static/images/error.png', true)}}" alt="top news">
+                  <p>{{item.news_title}} <br> </p>
+                </a>
+                  <!-- <p>{{item.news_para}}</p> -->
+                  <small>{{item.news_sources}} <br> {{item.news_time}}</small>
+              </div>
+            </div>
+            {% endfor %}
+      */
+
+  });
+
 }
 
 function buildPlot(stock) {
   var url = `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?start_date=2016-10-01&end_date=2017-10-01&collapse=monthly&api_key=${apiKey}`
-  
 
-  
   
   d3.json(url).then(function(data) {
     var name = data.dataset.name;

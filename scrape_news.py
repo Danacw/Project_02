@@ -10,7 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def get_news(ticker):
 
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=True)
     
     # Visit the google news with keyword
     keyword=ticker

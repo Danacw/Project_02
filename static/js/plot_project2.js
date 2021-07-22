@@ -23,7 +23,12 @@ function unpack(rows, index) {
 
 function handleSubmit() {
   // Prevent the page from refreshing
-  d3.event.preventDefault();
+  try{
+    d3.event.preventDefault();
+  }
+  catch{
+    console.log('No event for d3.event.preventDefault - this is ok for testing')
+  }
 
   // Select the input value from the form
   var stock = d3.select("#userInput").node().value;
@@ -32,6 +37,9 @@ function handleSubmit() {
   // clear the input value
   d3.select("#userInput").node().value = "";
 
+
+
+
   // Build the plot with the new stock
   buildPlot(stock);
 }
@@ -39,13 +47,7 @@ function handleSubmit() {
 function buildPlot(stock) {
   var url = `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?start_date=2016-10-01&end_date=2017-10-01&collapse=monthly&api_key=${apiKey}`
   
-  
-  try{
-    d3.event.preventDefault();
-  }
-  catch{
-    console.log('No event for d3.event.preventDefault - this is ok for testing')
-  }
+
   
   
   d3.json(url).then(function(data) {

@@ -1,5 +1,5 @@
-
-d3.json('/api/data').then(data => {
+  //populate data table
+  d3.json('/api/data').then(data => {
 
     data.forEach(search => {
         var tbody = d3.select('#stocks_tbody');
@@ -10,28 +10,4 @@ d3.json('/api/data').then(data => {
             row.append('td').text(col);
         });
     });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  });

@@ -4,17 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <title>Project-02</title>
     
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="Stylesheet" href="../static/css/style.css">
+
 
   </head>
 
   <body>
+  
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -24,20 +25,16 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
           <a class="navbar-brand">STOCK | CRYPTO Analysis</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-<<<<<<< HEAD:templates/index.html
 
           <form class="navbar-form navbar-right" method="POST" action="/send">
 
           <!-- <form class="navbar-form navbar-right"> -->
 
-=======
-          <form class="navbar-form navbar-right" method="POST" action="/send">
-          <form class="navbar-form navbar-right">
->>>>>>> ecc02d4ec2851934a6752cbac9e97a4e62a42166:HTML/index.html
             <div class="form-group">
               <input type="text" placeholder="Stock/Crypto" id="userInput" name="userInput" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Update</button>
+            <button id="update" type="submit"  class="btn btn-success">Update</button>
+            
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -45,32 +42,41 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 
     <div class="jumbotron">
       <div class="container">
-<<<<<<< HEAD:templates/index.html
 
       <h1>Stock and Crypto Summary</h1>
       <img src="../static/images/stock.jpg" alt="Stock Photo">
   </div>
   </div>
-=======
-      <h1>Stock and Crypto Summary</h1>
-      <img src="images/stock.jpg" alt="Stock Photo">
-    </div>
->>>>>>> ecc02d4ec2851934a6752cbac9e97a4e62a42166:HTML/index.html
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-4">
           <h2>Company profile</h2>
           <p></p>
           <p></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4">
           <h2>Market Summary</h2>
           <p></p>
           <p></p>
-       </div>
-        <div class="col-md-4">
+        </div>
+        <div class="col-lg-4">
           <h2>Top Stories</h2>
-          <p></p>
+
+          <div class="row">
+
+            {% for item in stock %}
+            <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
+              <div class="thumbnail">
+                <a href="{{item.news_link}}">
+                  <img src="{{item.image_sources | default('static/images/error.png', true)}}" alt="top news">
+                  <p>{{item.news_title}}</p>
+                </a>
+                  <!-- <p>{{item.news_para}}</p> -->
+                  <small>{{item.news_sources}} - {{item.news_time}}</small>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
         </div>
 
 
@@ -83,5 +89,6 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
         <p>Brought to you by Project Group 2 (Dana Walker, Emory Mansuetti, Amy Chen, Tina Ren, Christopher Velasquez)</p>
       </footer>
     </div>
-
+    <script src="../static/js/script.js"></script>
+  </body>
 

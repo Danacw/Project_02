@@ -90,7 +90,7 @@ function buildSummary(stock) {
   var introduction_div = d3.select("#introduction")
   if (cur_stock_info) {
     title.html(`<a href="${cur_stock_info.wiki_url}"><h2>${cur_stock_info.company_name} Company Profile</h2></a>`);
-    introduction_div.html(`<p>${cur_stock_info.introduction}</p>`);
+    introduction_div.html(`<h3>${cur_stock_info.introduction}</h3>`);
   }
   else {
     introduction_div.html(`<p> ${stock} Company profile not found.</p>`);

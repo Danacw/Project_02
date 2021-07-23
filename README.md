@@ -1,4 +1,3 @@
-![Screen Shot 2021-07-23 at 12 00 26 PM](https://user-images.githubusercontent.com/26308909/126829056-0c3b7e56-6d40-42ec-b5de-a5cf05fb9bbb.png)
 # Project_02
 **Stocks Market Analysis**
 

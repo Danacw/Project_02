@@ -73,11 +73,15 @@ function populateTopStories(stock){
     topstories_div.html("")
     data.forEach(story => {
 
-      story_div = topstories_div.append('div').attr('class', 'col-lg-4 col-md-3 col-sm-3 col-xs-3');
-      thumbnail_div = story_div.append('div').attr('class', 'thumbnail');
-      thumbnail_link = thumbnail_div.append('a').attr('href', story['news_link']);
-      thumbnail_link_img = thumbnail_link.append('img').attr('src', story['image_sources']);
-      thumbnail_link_text = thumbnail_div.append('a').attr('href', story['news_link']).text(story['news_title']);
+      story_div = topstories_div.append(‘div’).attr(‘class’, ‘col-lg-4 col-md-3 col-sm-3 col-xs-3’);
+      thumbnail_div = story_div.append(‘div’).attr(‘class’, ‘thumbnail’);
+      thumbnail_link = thumbnail_div.append(‘a’).attr(‘href’, story[‘news_link’]);
+      thumbnail_link_img = thumbnail_link.append(‘img’).attr(‘src’, story[‘image_sources’]);
+      thumbnail_link_text = thumbnail_div.append(‘a’).attr(‘href’, story[‘news_link’]).text(story[‘news_title’]);
+      thumbnail_link_text = thumbnail_div.append(‘small’).text(story[‘news_para’])
+      words_break = thumbnail_div.append(‘br’);
+      words_break2 = thumbnail_div.append(‘br’);
+      thumbnail_news_sources = thumbnail_div.append(‘small’).text(`${story[‘news_sources’]} - ${story[‘news_time’]}`).attr(‘id’, ‘sources’);
     })
   });
 }

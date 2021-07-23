@@ -135,3 +135,4 @@ config.py
 .DS_Store
 /static.DS_Store
 dbexport.pgsql
+dbexport.pgsql

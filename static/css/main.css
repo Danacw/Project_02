@@ -124,7 +124,7 @@ body main.clock-display {
 	color: #2b2828;
 	position: absolute;
 	top: 0;
-	z-index: 50;
+pa	z-index: 50;
 }
 .clock-field .numbers .type {
   font-size: 10px;

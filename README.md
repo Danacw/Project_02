@@ -27,7 +27,6 @@ For our second project, we used the Quandl API, MongoDB, and the Plotly JavaScri
   - Contains our frontend index.html file, and our backlog.html file that collects user data on the backend. 
 
 ![Screen Shot 2021-07-23 at 11 16 37 AM](https://user-images.githubusercontent.com/26308909/126828734-720446b6-52fb-46b5-a1c8-884695038198.png)
-
 ![Screen Shot 2021-07-23 at 12 01 29 PM](https://user-images.githubusercontent.com/26308909/126829172-94bb7909-5377-45cb-89d7-58b06d9eee77.png)
 
 

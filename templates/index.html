@@ -17,6 +17,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 <link rel="Stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<link rel="stylesheet" href="../static/css/main.css">
 
   </head>
 
@@ -27,7 +28,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           </button>
-          <a class="navbar-brand">STOCK | CRYPTO Analysis</a>
+          <a class="navbar-brand">Stock Market Analysis</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <!-- <form class="navbar-form navbar-right" method="POST" action="/send"> -->
@@ -43,7 +44,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 
     <div class="jumbotron">
       <div class="container">
-      <h1>Stock and Crypto Summary</h1>
+      <h1>Stock Market Summary</h1>
       <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -94,11 +95,110 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
           </div>
         </div>
       </div>
-    </body>
+
+    <main class="clock-display">
+      <h1>Flux Capacitor Clock</h1>
+      <div class="date-field">
+        <div class="day-of-week">
+          <p class="day-alpha"></p>
+          <p class="placeholder">mmmmmmmmm</p>
+          <p class="placeholder">ooooooooo</p>
+          <p class="placeholder">nnnnnnnnn</p>
+          <p class="placeholder">ttttttttt</p>
+          <p class="placeholder">uuuuuuuuu</p>
+          <p class="placeholder">eeeeeeeee</p>
+          <p class="placeholder">sssssssss</p>
+          <p class="placeholder">wwwwwwwww</p>
+          <p class="placeholder">hhhhhhhhh</p>
+          <p class="placeholder">rrrrrrrrr</p>
+          <p class="placeholder">fffffffff</p>
+          <p class="placeholder">iiiiiiiii</p>
+          <p class="placeholder">ddddddddd</p>
+          <p class="placeholder">aaaaaaaaa</p>
+          <p class="placeholder">yyyyyyyyy</p>
+        </div>
+        <div class="day-of-week-mobile">
+          <p class="day-alpha-mobile"></p>
+          <p class="placeholder">mmm</p>
+          <p class="placeholder">ooo</p>
+          <p class="placeholder">nnn</p>
+          <p class="placeholder">ttt</p>
+          <p class="placeholder">uuu</p>
+          <p class="placeholder">eee</p>
+          <p class="placeholder">sss</p>
+          <p class="placeholder">www</p>
+          <p class="placeholder">hhh</p>
+          <p class="placeholder">rrr</p>
+          <p class="placeholder">fff</p>
+          <p class="placeholder">iii</p>
+        </div>
+        <div class="month">
+          <p class="month-alpha"></p>
+          <p class="placeholder">mmm</p>
+          <p class="placeholder">ooo</p>
+          <p class="placeholder">nnn</p>
+          <p class="placeholder">ttt</p>
+          <p class="placeholder">uuu</p>
+          <p class="placeholder">eee</p>
+          <p class="placeholder">sss</p>
+          <p class="placeholder">www</p>
+          <p class="placeholder">hhh</p>
+          <p class="placeholder">rrr</p>
+          <p class="placeholder">fff</p>
+          <p class="placeholder">iii</p>
+          <p class="placeholder">ddd</p>
+          <p class="placeholder">aaa</p>
+          <p class="placeholder">yyy</p>
+          <p class="type">month</p>
+        </div>
+        <div class="date">
+          <p class="date-number"></p>
+          <p class="placeholder">88</p>
+          <p class="type">day</p>
+        </div>
+        <div class="year">
+          <p class="year-number"></p>
+          <p class="placeholder">8888</p>
+          <p class="type">year</p>
+        </div>
+      </div>
+      <div class="clock-field">
+        <div class="numbers">
+          <p class="hours"></p>
+          <p class="placeholder">88</p>
+          <p class="type">hour</p>
+        </div>
+        <div class="colon">
+          <p>:</p>
+        </div>
+        <div class="numbers">
+          <p class="minutes"></p>
+          <p class="placeholder">88</p>
+          <p class="type">minute</p>
+        </div>
+        <div class="colon">
+          <p>:</p>
+        </div>
+        <div class="numbers">
+          <p class="seconds"></p>
+          <p class="placeholder">88</p>
+          <p class="type">second</p>
+        </div>
+        <div class="am-pm">
+          <div>
+            <p class="am">am</p>
+          </div>
+          <div>
+            <p class="pm">pm</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../static/js/main.js"></script>
     <script src="../static/js/nasdaq100.js"></script>
     <script src="../static/js/plot_project2.js"></script>
     
-    
+    </body>
 
     </html>
 

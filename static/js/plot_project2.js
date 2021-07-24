@@ -78,6 +78,7 @@ function populateTopStories(stock){
       thumbnail_link = thumbnail_div.append('a').attr('href', story['news_link']);
       thumbnail_link_img = thumbnail_link.append('img').attr('src', story['image_sources']);
       thumbnail_link_text = thumbnail_div.append('a').attr('href', story['news_link']).text(story['news_title']);
+      words_break0 = thumbnail_div.append('br');
       thumbnail_link_text = thumbnail_div.append('small').text(story['news_para']);
       words_break = thumbnail_div.append('br');
       words_break2 = thumbnail_div.append('br');

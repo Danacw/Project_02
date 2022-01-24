@@ -1,5 +1,5 @@
 # Project_02
-**Stocks Market Analysis**
+**Stock Market Analysis**
 
 For our second project, we used the Quandl API, MongoDB, and the Plotly JavaScript Library to obtain stock market data and create a dynamic flask application. The intereative dashboard allows users to search for stock codes to review company profiles, closing prices over time, annual market summaries, and top stories on any stock of their choosing.
 
